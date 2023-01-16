@@ -1,11 +1,13 @@
 FROM node:18
 
-WORKDIR /app/frontend
+WORKDIR /
 
-COPY package.json package-lock.json ./
+COPY package.json  ./
 
 RUN npm i
 
 COPY . .
 
-EXPOSE 5000
+EXPOSE 3000
+
+CMD ["node","build"]
