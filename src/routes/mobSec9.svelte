@@ -16,23 +16,22 @@
                 trigger:".mobContent9",
                 // markers:true,
                 scrub:1,
-                start:"top center",
-                end:"65% center"
+                start:"top 65%",
+                end:"65% 65%"
             }
         });
         
         let obj={
-            y:500,
+            y:50,
             opacity:0,
-            scale:0,
-            ease:"cric.out"
+            ease:"slow.out"
         }
-        mtl9.from(".mobHead9",obj)
-            .from(".mobDesc9",obj)
-            .from(".mobd9",obj)
+        mtl9.from(".mobHead9",{...obj,duration:.6})
+            .from(".mobDesc9",{...obj,duration:.6})
+            .from(".mobd9",{...obj,duration:.6})
         let heads=gsap.utils.toArray(".mbTitle9");
-        heads.forEach(x=>mtl9.from(x,{x:-500,opacity:0}));
-        mtl9.from(".mimg9",{delay:1,x:-500,y:200,opacity:.5,duration:2});
+        heads.forEach((x,i)=>mtl9.from(x,{x:-200,opacity:0,delay:i==0? 1.5:0}));
+        mtl9.from(".mimg9",{delay:1,x:-300,y:200,opacity:.2,duration:2});
     })
 </script>
 
@@ -41,8 +40,7 @@
         <h1 class="mobHead9">Control from any where</h1>
         <p class="mobDesc9">A home that responds</p>
 
-        <p class="mobd9">Access your home from anywhere in the world. Create unique scens,
-             define your ambience, schedules your routines, control all devices and elevate your living experience with the Keus smart app.</p>
+        <p class="mobd9">Access your smart home from anywhere in the world. Create unique scenes, define your ambience, schedules your routines, control all devices and elevate your living experience with the Keus smart app.</p>
 
         <h2 class="mbTitle9">
             <span class="mob9Icon">
@@ -75,7 +73,7 @@
             Media Control
         </h2>
         <div class="mobImg9">
-            <img src="src/lib/images/app.png" alt="app image" class="mimg9">
+            <img src="images/app.png" alt="app image" class="mimg9">
         </div>
     </div>
 </div>

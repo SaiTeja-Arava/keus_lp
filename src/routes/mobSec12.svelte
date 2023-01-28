@@ -11,21 +11,20 @@
         var mtl12=gsap.timeline({
             scrollTrigger:{
                 trigger:".mobContent12",
-                start:"top center",
-                end:"80% center",
+                start:"top 70%",
+                end:"80% 70%",
                 // markers:true,
                 scrub:1
             }
         });
 
         let obj={
-            y:500,
+            y:100,
             opacity:0,
-            scale:0,
             ease:"slow.out"
         }
 
-        mtl12.from(".mobHead12",obj)
+        mtl12.from(".mobHead12",{...obj,y:50})
             .from(".mobDesc12",obj)
         let imgs=gsap.utils.toArray(".img12");
 
@@ -36,10 +35,10 @@
 <div class="mobContent12">
     <div class="mob12">
         <h1 class="mobHead12">Smart Home Projects</h1>
-        <p class="mobDesc12">Choose your controls. </p>
+        <!-- <p class="mobDesc12">Choose your controls. </p> -->
         <div class="mobImages12">
             {#each arr as o}
-                <img src="src/lib/images/img{o}.png" alt="img{o}" class="col-6 img12">
+                <img src="images/img{o}.png" alt="img{o}" class="col-6 img12">
             {/each}
         </div>
     </div>

@@ -7,10 +7,11 @@
     import Fa from "svelte-fa";
     import {faChevronRight, faPlayCircle} from "@fortawesome/free-solid-svg-icons";
     import {AutoScroll} from "@splidejs/splide-extension-auto-scroll";
+    import {scale} from "svelte/transition"
     
     let playing;
     let active=1;
-    let scale=1;
+    let scle=1;
     let ele;
     let isPlaying=false;
 
@@ -33,42 +34,42 @@
         }
     }
 
-    let tabs=["baba","neelesh","priyanka","sravanthiKollur","suprajarao","vaishnaviLinga","naveenPanuganti"]
+    let tabs=["baba","neelesh","priyanka","sravanthiKollur","suprajaRao","vaishnaviLinga","naveenPanuganti"]
     let arr=[
         {
             title:"Baba Shashank",
             desc:"Space Fiction Studio",
-            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Architect+videos/baba.webm"
+            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Architect+videos/Baba+Shashank+Final.m4v"
         },
         {
             title:"S Neelesh Kumar",
             desc:"23 deg Design Shift",
-            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Architect+videos/nilesh.webm"
+            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Architect+videos/S+Neelesh+Kumar+3.m4v"
         },
         {
             title:"Priyanka Ghattamaneni",
             desc:"Studio Emerald",
-            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Architect+videos/priyanka.webm"
+            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Architect+videos/Priyanka+Ghattamaneni+F.m4v"
         },
         {
             title:"Sravanthi Kolluri",
             desc:"Principal Architect EssEnn Architects",
-            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Architect+videos/sravanti.webm"
+            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Architect+videos/Sravanthi+1080+1.m4v"
         },
         {
             title:"Supraja Rao",
             desc:"Design House",
-            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Architect+videos/supraja-rao.webm"
+            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Architect+videos/Supraja+Rao+Hd+1080.m4v"
         },
         {
             title:"Vishnavi Linga",
             desc:"VAL Atelier",
-            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Architect+videos/lingavaishanavi.webm"
+            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Architect+videos/Vaishnavi+Linga.m4v"
         },
         {
             title:"Naveen Panuganti",
             desc:'Principal Architect Naveen Associates',
-            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Architect+videos/naveen.webm"
+            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Architect+videos/Naveen+Panuganti+1080+1.m4v"
         }
     ];
 
@@ -78,18 +79,17 @@
         var tl10=gsap.timeline({
             scrollTrigger:{
                 trigger:".container10",
-                start:"top center",
-                end:"10% center",
+                start:"top 70%",
+                end:"10% 70%",
                 scrub:1,
                 // markers:true
             }
         });
         let tlopt={
-            y:100,
+            y:"1.5vw",
             opacity:0,
-            scaleY:0,
-            ease:"cric.out",
-            duration:1
+            ease:"slow.out",
+            duration:.8
         }
         tl10.from(".mainHead10",tlopt)
             .from(".desc10",tlopt);
@@ -97,16 +97,15 @@
         gsap.from(".video10",{
             scrollTrigger:{
                 trigger:".container10",
-                start:"10% center",
-                end:"40% center",
+                start:"10% 65%",
+                end:"40% 65%",
                 // markers:true,
                 scrub:1
             },
-            y:800,
-            scaleX:0,
+            y:"2.5vw",
             opacity:0,
-            duration:2,
-            ease:"cric.out"
+            duration:.8,
+            ease:"slow.out"
         })
     })
 </script>
@@ -127,7 +126,8 @@
                 padding:"24%",
                 autoScroll:{
                     speed:3,
-                }
+                },
+                easing:"ease-out"
             }}
             on:move={e=>{
                 if(playing) playing.target.load();
@@ -142,17 +142,33 @@
                             <div class="videos10"
                             style="scale:{active==i+1? "1":".8"};opacity:{active==i+1? 1:.5}">
                                 {#if active==i+1 && !isPlaying}
-                                    <span class="playBtn" style="scale:{scale}">
+                                    <span class="playBtn" style="scale:{scle}"
+                                    transition:scale
+                                    on:mouseover={()=>scle=2}
+                                    on:mouseleave={()=>scle=1}
+                                    on:click={()=>{
+                                        let vdos=document.querySelectorAll(".video10");
+                                        if(vdos[active+1].paused){
+                                            vdos[active+1].play();
+                                            playing={target:vdos[active+1]};
+                                            isPlaying=true;
+                                        }
+                                        else{
+                                            vdos[active+1].pause();
+                                            isPlaying=false;
+                                        }
+                                    }}
+                                    >
                                         <Fa icon={faPlayCircle} size="{innerWidth*.001}x" color="#827f7e" />
                                     </span>
                                 {/if}
                                 <video
-                                on:mouseover={()=>scale=2}
-                                on:mouseleave={()=>scale=1}
+                                on:mouseover={()=>scle=2}
+                                on:mouseleave={()=>scle=1}
                                 class="video10 d-inline-block"
                                 preload="auto"
                                 id="video-{i}"
-                                poster="src/lib/videos/{tab}/poster.jpg"
+                                poster="videos/{tab}/poster.jpg"
                                 src="{arr[i]?.link}"
                                 on:click={(e)=>{
                                     if(active==i+1){
@@ -195,6 +211,9 @@
 </div>
 
 <style>
+    .container10{
+        /* height:20px; */
+    }
     .playBtn{
         position: absolute;
         right:15vw;

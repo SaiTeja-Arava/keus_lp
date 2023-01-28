@@ -14,19 +14,19 @@
     let obj=[
         {
             title:"Smart Console",
-            desc:"Keus really helped us in elevating our new-villa experience with their home automation. Keus really helped us in elevating our new-villa experience with their home automation. Keus really helped us in elevating our new-villa experience with their home automation. "
+            desc:"The smart console is a beautifully designed and feature packed, in-wall smart control system that provides an unparalleled home automation experience for premium and luxury residential spaces."
         },
         {
             title:"Smart Wizard",
-            desc:"Keus really helped us in elevating our new-villa experience with their home automation. Keus really helped us in elevating our new-villa experience with their home automation. Keus really helped us in elevating our new-villa experience with their home automation. "
+            desc:"Experience true mobility with the Scene Wizard, an exquisitely designed portable room controller. Transform your living experience with a single click."
         },
         {
             title:"Smart App",
-            desc:"Keus really helped us in elevating our new-villa experience with their home automation. Keus really helped us in elevating our new-villa experience with their home automation. Keus really helped us in elevating our new-villa experience with their home automation. "
+            desc:"Control from anywhere. Create unique scenes, define your ambience, schedule your routines, control your devices and elevate your living experience with the Keus smart app."
         },
         {
             title:"Smart Voice",
-            desc:"Keus really helped us in elevating our new-villa experience with their home automation. Keus really helped us in elevating our new-villa experience with their home automation. Keus really helped us in elevating our new-villa experience with their home automation. "
+            desc:"Experience a smart home at your command. The perfect automation experience is just a shout away."
         }
     ]
 
@@ -60,25 +60,22 @@
             scrollTrigger:{
                 trigger:".mobContent5",
                 // markers:true,
-                start:"top center",
-                end:"30% center",
+                start:"top 70%",
+                end:"20% 70%",
                 scrub:1
             }
         });
 
         let obj={
-            y:500,
+            y:50,
             opacity:0,
-            scaleY:0,
-            ease:"cric.out"
+            ease:"slow.out"
         }
         mtl5.from(".mobCollapse5",obj);
     })
 </script>
 
 <svelte:window
-on:click={()=>mute=false}
-
 on:scroll={triggerAllow}
 
 />
@@ -110,14 +107,10 @@ on:scroll={triggerAllow}
                     </h1>
                     <Collapse isOpen={active==i}>
                         <div class="mobVdiv5">
-                            {#if mute}
-                                <span class="mute5">
-                                    <Fa icon={faVolumeMute} color="#fff" size="2x" />
-                                </span>
-                            {/if}
                             <video src="{vdoMap[i+1]}"
-                            muted={mute}
+                            muted
                             preload="auto"
+                            playsinline
                             autoplay
                             on:click={
                                 (e)=>{

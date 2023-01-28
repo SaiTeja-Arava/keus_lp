@@ -16,27 +16,15 @@
             scrollTrigger:{
                 trigger:".container9",
                 scrub:1,
-                ease:"cric.out",
-                start:"top center",
-                end:"center center",
+                duration:.8,
+                ease:"slow.out",
+                start:"top 70%",
+                end:"40% 70%",
                 // markers:true
             },
-            x:-800,
-            y:800,
+            x:"-40vw",
+            y:"40vw",
             opacity:0.5
-        })
-
-        gsap.from(".rightSide9",{
-            scrollTrigger:{
-                trigger:".container9",
-                scrub:1,
-                ease:"cric.out",
-                start:"30% center",
-                end:"center center",
-                // markers:true
-            },
-            y:800,
-            opacity:0
         })
     })
 </script>
@@ -47,7 +35,7 @@
             <Col>
                 <div class="img9-1">
 
-                    <img src="src/lib/images/app.png" alt="app image" class="img9">
+                    <img src="images/app.png" alt="app image" class="img9">
                 </div>
             </Col>
             <Col class="pt-5 container-fluid">
@@ -55,7 +43,7 @@
                     <h1 class="mainHead9">Control from<br/>
                         anywhere</h1>
                     <p class="desc9">A home that responds</p>
-                    <p class="titleDesc9">Access your home from anywhere in the world. Create unique scens, define your ambience, schedules your routines, control all devices and elevate your living experience with the Keus smart app.</p>
+                    <p class="titleDesc9">Access your smart home from anywhere in the world. Create unique scenes, define your ambience, schedules your routines, control all devices and elevate your living experience with the Keus smart app.</p>
                     <p class="title9 col-md-4 d-inline-block">
                         <span class="icon9">
                             <Sun color="#56483D" width="2.3vw" />
@@ -66,7 +54,7 @@
                         <span class="icon9">
                             <Adapter color="#56483D" width={1.5} />
                         </span>
-                        Appliance Control
+                        &ensp;Appliance Control
                     </p>
                     <p class="title9 col-md-4 d-inline-block">
                         <span class="icon9">
@@ -97,7 +85,7 @@
        width:131%
     }
     .icon9{
-        margin:0 1vw 0;
+        margin:0 1vw 0 0;
     }
     .mainHead9{
         font-family: 'Playfair Display', serif;
@@ -128,6 +116,7 @@
         font-size: 1.304vw;
         line-height: 1.565vw;
         font-weight: 400;
+        text-align: left;
     }
     .titleDesc9{
         font-weight: 300;
@@ -149,7 +138,8 @@
         padding:0 0 3vw;
     }
     .container9,.content9{
-        min-height:120vh;
+        height:55vw;
+        max-height:60vw;
         /* width:100%; */
         overflow: hidden;;
     }

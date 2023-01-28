@@ -66,15 +66,21 @@
             scrollTrigger:{
                 trigger:".content1",
                 scrub:1,
-                start:"20% 80%",
-                end:"20% 40%",
+                start:"top 80%",
+                end:"top 40%"
                 // markers:true,
             }
         })
+        let opt={
+            y:"2.5vw",
+            opacity:0,
+            duration:.8,
+            ease:"slow.out"
+        }
 
-        tl1.from(".mainHead",{y:200,scaleY:0,opacity:0,duration:1})
-            .from(".desc1",{y:200,opacity:0,scaleY:0,duration:1})
-            .from(".mainContainer",{y:500,opacity:0,scaleX:0,duration:1});
+        tl1.from(".mainHead",opt)
+            .from(".desc1",opt)
+            .from(".mainContainer",opt);
     })
 
 </script>
@@ -131,7 +137,7 @@
                             </div>
                             {#if active==i+1}
                                 <div transition:fade={{duration:800,delay:active==i+1? 200:500}} class="col-10">
-                                    <h2 class="title mt-3">{tab.title}</h2>
+                                    <h2 class="title">{tab.title}</h2>
                                     <p class="titleDesc">{tab.desc}</p>
                                 </div>
                             {/if}
@@ -215,6 +221,7 @@
     }
     .title{
         /* font-size: 22px; */
+        margin-top: 1vw;
         font-size:1.147vw;
     }
     .titleDesc{

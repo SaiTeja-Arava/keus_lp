@@ -8,22 +8,21 @@
     var tl7=gsap.timeline({
         scrollTrigger:{
             trigger:".container7",
-            start:"top center",
-            end:"center center",
+            start:"10% 60%",
+            end:"40% 60%",
             // markers:true,
             scrub:1
         }
     });
 
-    tl7.from(".main7",{y:200,opacity:0,duration:1.5,ease:"cric.out"})
-        .from(".wizard",{y:200,opacity:0,duration:1.5,ease:"cric.out"});
+    tl7.from(".wizard",{y:"15vw",opacity:0,ease:"slow.out"});
 
   })
 
 </script>
 
 <div class="container7 container-fluid pt-5">
-    <img src="src/lib/images/wizard.png" alt="wizard image" class="wizard" />
+    <img src="images/wizard.png" alt="wizard image" class="wizard" />
     <div class="main7 col-md-4 float-end rightFloat">
         <h1 class="mainHead7 mb-5">Ambience <br/>
             in your palm</h1>
@@ -54,6 +53,7 @@
     .wizard{
         position: absolute;
         width:70%;
+        height:100%;
         object-fit: cover;
         left:0;
         top:0;
@@ -61,7 +61,7 @@
     .container7{
         position: relative;
         width:100vw;
-        min-height: 100vh;
+        min-height: 55vw;
         overflow: hidden;
     }
     .mainHead7{

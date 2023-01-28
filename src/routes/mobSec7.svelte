@@ -26,23 +26,23 @@
                 trigger:".mobContent7",
                 // markers:true,
                 scrub:1,
-                start:"top center",
-                end:"center center"
+                start:"top 70%",
+                end:"70% 70%"
             }
         });
 
         let obj={
-            y:500,
+            y:50,
             opacity:0,
-            scale:0
+            ease:"slow.out",
         }
         mtl7.from(".mobHead7",obj)
             .from(".mobDesc7",obj)
         let heads=gsap.utils.toArray(".mobTitle7");
         let descs=gsap.utils.toArray(".mobd7");
         heads.forEach((x,i)=>{
-            mtl7.from(x,{x:-500,opacity:0})
-                .from(descs[i],{x:-500,opacity:0})
+            mtl7.from(x,{x:-200,opacity:0,ease:"slow.out"})
+                .from(descs[i],{x:-200,opacity:0,ease:"slow.out"})
         })
         mtl7.from(".mimg7",{x:250,y:100,rotate:-90,duration:2})
     })
@@ -58,7 +58,7 @@
             {/each}
         </div>
         <div class="mobi7">
-            <img src="src/lib/images/wizard.png" alt="wizard image" class="mimg7">
+            <img src="images/wizard.png" alt="wizard image" class="mimg7">
         </div>
     </div>
 </div>

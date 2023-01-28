@@ -16,19 +16,19 @@
     let obj=[
         {
             title:"Smart Console",
-            desc:"Keus really helped us in elevating our new-villa experience with their home automation. Keus really helped us in elevating our new-villa experience with their home automation. Keus really helped us in elevating our new-villa experience with their home automation. "
+            desc:"The smart console is a beautifully designed and feature packed, in-wall smart control system that provides an unparalleled home automation experience for premium and luxury residential spaces."
         },
         {
             title:"Smart Wizard",
-            desc:"Keus really helped us in elevating our new-villa experience with their home automation. Keus really helped us in elevating our new-villa experience with their home automation. Keus really helped us in elevating our new-villa experience with their home automation. "
+            desc:"Experience true mobility with the Scene Wizard, an exquisitely designed portable room controller. Transform your living experience with a single click."
         },
         {
             title:"Smart App",
-            desc:"Keus really helped us in elevating our new-villa experience with their home automation. Keus really helped us in elevating our new-villa experience with their home automation. Keus really helped us in elevating our new-villa experience with their home automation. "
+            desc:"Control from anywhere. Create unique scenes, define your ambience, schedule your routines, control your devices and elevate your living experience with the Keus smart app."
         },
         {
             title:"Smart Voice",
-            desc:"Keus really helped us in elevating our new-villa experience with their home automation. Keus really helped us in elevating our new-villa experience with their home automation. Keus really helped us in elevating our new-villa experience with their home automation. "
+            desc:"Experience a smart home at your command. The perfect automation experience is just a shout away."
         }
     ]
     let allowPlay=false;
@@ -68,14 +68,21 @@
                 trigger:".container5",
                 scrub:1,
                 // markers:true,
-                start:"20% 80%",
-                end:"20% 40%",
+                start:"top 80%",
+                end:"20% 60%",
             },
         })
+
+        let opt1={
+            y:"2.8vw",
+            opacity:0,
+            duration:.8,
+            ease:"slow.out"
+        }
         
 
-        tl3.from(".mainHead5",{y:200,scaleX:0,opacity:0,duration:1})
-        .from(".desc5",{y:200,scale:0,opacity:0,duration:1})
+        tl3.from(".mainHead5",opt1)
+        .from(".desc5",opt1)
 
         gsap.from(".leftFrame",{
             scrollTrigger:{
@@ -85,8 +92,9 @@
                 start:"20% 60%",
                 end:"60% 60%"
             },
-            x:-700,
-            opacity:0
+            x:"-3vw",
+            opacity:0,
+            ease:"slow.out"
         })
         
         gsap.from(".rightFrame",{
@@ -97,13 +105,14 @@
                 start:"20% 60%",
                 end:"60% 60%"
             },
-            x:700,
-            opacity:0
+            x:"3vw",
+            opacity:0,
+            ease:"slow.out"
         })
     })
 </script>
 
-<svelte:window on:scroll={triggerAllow} bind:innerWidth on:click={()=>muted=false}/>
+<svelte:window on:scroll={triggerAllow} bind:innerWidth/>
 <div id="product"></div>
 <div class="container5" id="cont5" bind:this={ele}  >
         <h1 class="mainHead5">Intuitive Interfaces</h1>
@@ -118,20 +127,12 @@
                                 if(e.target.paused) e.target.play();
                                 else e.target.pause();
                             }}
-                            muted={muted}
+                            muted
                             preload="auto"
                             transition:fade 
                             src="{vdoMap[tab]}" class="video5" autoplay/>
                         {/key}
-                        {#if muted}
-                            <span class="mute">
-                                {#if innerWidth>4500}
-                                    <Fa icon={faVolumeMute} color="#fff" size="5x"/>
-                                    {:else}
-                                        <Fa icon={faVolumeMute} color="#fff" size="2x"/>
-                                {/if}
-                            </span>
-                        {/if}
+                        
                     </div>
                 </Col>
                 <Col class="">
@@ -148,11 +149,12 @@
                                     setTimeout(() => {
                                         active=i+1;
                                         lock=false;
-                                    }, 200);
+                                    }, 0);
                                 }
                             }}>
                                 <h1 class="collapseTitle title5"
-                                style="font-size:{active==i+1? "2.0868":"1.565"}vw;"
+                                style="font-size:{active==i+1? "2.0868":"1.565"}vw;
+                                transition:200ms"
                                 >{o.title}
                                 {#if active!=i+1}
                                     <span class="float-end">
@@ -161,7 +163,8 @@
                                 {/if}
                             </h1>
                                 <Collapse isOpen={active==i+1}>
-                                    <p class="collapseDesc titleDesc5">{o.desc}</p>
+                                    <p class="collapseDesc titleDesc5"
+                                    >{o.desc}</p>
                                 </Collapse>
                             </div>
                         {/each}

@@ -11,23 +11,22 @@
             scrollTrigger:{
                 trigger:".container6",
                 scrub:1,
-                start:"top center",
-                end:"45% center",
+                start:"top 90%",
+                end:"55% 90%",
                 // markers:true
             }
         });
         let opt6={
-            y:500,
+            y:"2.5vw",
+            duration:.8,
             opacity:0,
-            duration:1,
-            scaleX:0,
-            ease:"cric.out"
+            ease:"slow.out"
         }
 
         tl6.from(".mainHead6",opt6)
             .from(".mainDesc6",opt6)
             .from(".desc6",opt6)
-            .from(".image",{...opt6,scaleX:1,scaleY:0,duration:2})
+            .from(".image",opt6)
 
     })
 </script>
@@ -36,7 +35,7 @@
     <h1 class="mainHead6">Meet the smart console</h1>
     <p class="mainDesc6">The only switch system your home needs.</p>
     <p class="desc6">A home becomes an aesthetic marvel when every single element comes together to define its character. Such exclusive homes deserve the most beautiful consoles.</p>
-    <img class="image" src="src/lib/images/console.png" alt="console image" />
+    <img class="image" src="images/console.png" alt="console image" />
 </div>
 
 <style>

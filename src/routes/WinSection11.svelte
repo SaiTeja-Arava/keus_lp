@@ -1,8 +1,8 @@
 <script>
-    import '@splidejs/svelte-splide/css';
+    // import '@splidejs/svelte-splide/css';
     import {Splide,SplideSlide, SplideTrack} from "@splidejs/svelte-splide"
     import {gsap} from "gsap";
-    import { slide,blur,fly } from "svelte/transition";
+    import { slide,blur,fly,scale } from "svelte/transition";
     import { Col, Row } from "sveltestrap";
     import Slide from "$lib/common/HSlide"
     import {onMount} from "svelte";
@@ -13,7 +13,7 @@
     let playing=false;
     let playingVideo;
     let active;
-    let scale=1;
+    let scle=1;
 
     let ele;
 
@@ -21,16 +21,17 @@
         // console.log("",playingVideo);
         if(playingVideo){
             let y=ele.getBoundingClientRect();
-            if(y.top>0){
+            if(y.top>y.height-100){
                 if(!playingVideo.paused) playingVideo.load();
                 playing=false;
                 // console.log("paused---------------")
             }
-            if(y.top<-(y.height)+200){
+            if(y.top<-(y.height)+100){
                 if(!playingVideo.paused) playingVideo.load();
                 playing=false;
                 // console.log("paused------------------")
             }
+            // console.log(y.top,-y.height)
         }
     }
 
@@ -38,23 +39,23 @@
         {
             title:"Villa No.70",
             desc:"Cyprus Palms",
-            dd:"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
+            dd:"See how the best-in-class automation solutions from Keus, elevated the living experience in this stunningly designed villa. Watch how the various smart controls like the Keus app, smart consoles and scene wizards come together to transform and provide true convenience to this gorgeous home.",
             stars:5,
-            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Home+Videos/Compressed+Videos/cyprus.webm"
+            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Home+Videos/Compressed+Videos/Cyprus+Palms+Final+Comp.m4v"
         },
         {
-            title:"Villa No.70",
-            desc:"Cyprus Palms",
-            dd:"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-            stars:2,
-            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Home+Videos/Compressed+Videos/villa-39.webm"
+            title:"Villa No. 39",
+            desc:"Aditya Casagrande",
+            dd:"Watch how the Keus smart home solution elevated and transformed the living experience of this beautifully designed super luxurious residence of over 15000sft.",
+            stars:5,
+            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Home+Videos/Compressed+Videos/Villa+No-39.m4v"
         },
         {
-            title:"Villa No.70",
-            desc:"Cyprus Palms",
-            dd:"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-            stars:3,
-            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Home+Videos/Compressed+Videos/brijesh.webm"
+            title:"Villa No. 12",
+            desc:"Aditya Casagrande",
+            dd:"One of the best examples of how the living experience of a home comes alive and amplifies because of deep home automation.",
+            stars:5,
+            link:"https://keus-resources.s3.ap-south-1.amazonaws.com/landing_page_files/drive-download-20230116T073317Z-001/Home+Videos/Compressed+Videos/Brijesh+House+Villa+No-13.m4v"
         }
     ]
 
@@ -64,22 +65,21 @@
         var tl11=gsap.timeline({
             scrollTrigger:{
                 trigger:".container11",
-                start:"top center",
-                end:"20% center",
+                start:"top 80%",
+                end:"center 80%",
                 scrub:1,
                 // markers:true
             }
         });
         let tl1opt={
-            y:100,
+            y:"2vw",
             opacity:0,
-            duration:1,
-            scaleY:0,
-            ease:"cric.out"
+            duration:.8,
+            ease:"slow.out"
         }
         tl11.from(".mainHead11",tl1opt)
             .from(".desc11",tl1opt)
-            .from(".splideDiv11",{...tl1opt,scaleX:0})
+            .from(".splideDiv11",tl1opt)
     })
 </script>
 
@@ -110,11 +110,11 @@
                         <div class="slide11">
                             <Row>
                                 {#if !playing}
-                                    <div transition:Slide={{duration:200}} id="leftCol11" class="col-6">
+                                    <div transition:Slide={{duration:400}} id="leftCol11" class="col-6">
                                         <div class="left11">
-                                            <h1 class="title11 mt-5">{o.title}</h1>
+                                            <h1 class="title11">{o.title}</h1>
                                             <p class="desc11-1">{o.desc}</p>
-                                            <p class="titleDesc11 mt-5">
+                                            <p class="titleDesc11">
                                                 {o.dd}
                                             </p>
                                             <div class="winStars11">
@@ -131,26 +131,41 @@
                                                     color="{o.stars>=4? "#BEBDBD":"#e5e5e5"}"
                                                     /></span>
                                                 <span class="winStar"><Fa icon={faStar} 
-                                                    color="{o.stars>=5? "#BEBDBD":"#e5e5e5"}"
+                                                     color="{o.stars>=5? "#BEBDBD":"#e5e5e5"}"
                                                     /></span>
                                             </div>
                                         </div>
                                     </div>
                                 {/if}
                                 <Col class="px-0 w-100">
-                                    {#if active==i+1 && !playing}
-                                        <span class="playBtn" style="scale:{scale}">
+                                    {#if !playing}
+                                        <span class="playBtn" style="scale:{scle}"
+                                        on:mouseover={()=>scle=2}
+                                        on:mouseleave={()=>scle=1}
+                                        on:click={()=>{
+                                            let vdos=document.querySelectorAll(".video11");
+                                            if(vdos[active+1].paused) {
+                                                vdos[active+1].play();
+                                                playing=true;
+                                                playingVideo=vdos[active-1]
+                                            }
+                                            else vdos[active-1].pause()
+                                        }}
+                                        transition:scale
+                                        >
                                             <Fa icon={faPlayCircle} size="{innerWidth*.001}x" color="#827f7e" />
                                         </span>
                                     {/if}
                                     <video
-                                    on:mouseover={()=>scale=2}
-                                    on:mouseleave={()=>scale=1}
                                     id="video-{i+1}"
                                     preload="auto"
-                                    src="{arr[i]?.link}" poster="src/lib/videos/homes/{i+1}/poster.jpg" on:click={(e)=>{
+                                    playsinline
+                                    src="{arr[i]?.link}" poster="videos/homes/{i+1}/poster.jpg" 
+                                    on:mouseover={()=>scle=2}
+                                    on:mouseleave={()=>scle=1}
+                                    on:click={(e)=>{
                                         if(e.target.paused){
-                                            playing=true;
+                                            playing=true; 
                                             e.target.play();
                                             playingVideo=e.target;
                                         }
@@ -158,7 +173,8 @@
                                             playing=false;
                                             setTimeout(()=>e.target.load(),400)
                                         }
-                                    }} class="video11"></video>
+                                    }}
+                                    class="video11"></video>
                                 </Col>
                             </Row>
                         </div>
@@ -174,7 +190,6 @@
                     <button class="splide__arrow splide__arrow--next nextBtn10">
                         <span class="next10">
                             <Fa icon={faChevronRight} />
-
                         </span>
                     </button>
                 </div>
@@ -187,13 +202,14 @@
 <style>
     .playBtn{
         position: absolute;
-        right:12vw;
-        bottom:4vw;
+        right:18vw;
+        bottom:5vw;
         z-index: 9999;
         transition: 100ms;
     }
     #leftCol11{
         padding:0;
+        height: 82vh;
     }
     .content11{
         margin:6vw 0 2vw;
@@ -201,7 +217,10 @@
     }
     .video11{
         width:100%;
-        height:80vh;
+        min-height:100.15%;
+        max-height: 38.5vw;
+        position: relative;
+        
         object-fit: cover;
         transition: 1s;
     }
@@ -212,17 +231,18 @@
         margin:2vw 0 0;
     }
     .slide11{
-        width:80%;
+        width:70%;
         /* border-radius: 50px; */
         border-radius: 2vw;
+        min-height:38.2vw;
         overflow: hidden;
         transition:500ms;
-        margin:1.5vw auto 2vw;
+        margin:1.5vw auto 2.5vw;
     }
     .left11{
         width:100%;
-        min-height: 100%;
-        max-height:80vh;
+        min-height: 38.2vw;
+        max-height:38.2vw;
         overflow: hidden;
         background-color: #F0F0F0;
         /* padding:200px 150px 50px; */
@@ -249,6 +269,7 @@
     .title11{
         /* font-size: 50px; */
         font-size: 2.6083vw;
+        margin-top:2vw;
     }
     .desc11-1{
         /* font-size: 25px; */
@@ -260,7 +281,8 @@
     .titleDesc11{
         width:80%;
         /* font-size: 24px; */
-        font-size: 1.252vw;
+        margin-top: 1.5vw;
+        font-size: .88vw;
         font-weight: 300;
     }
     .prev10,.next10{

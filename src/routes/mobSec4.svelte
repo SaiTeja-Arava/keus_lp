@@ -19,31 +19,31 @@
     let arr=[
         {
             title:"Smart Lights",
-            desc:"Keus really helped us in elevating our new-villa "
+            desc:"When smart tech makes your light design, transform your space with a single tap"
         },
         {
             title:"Smart Curtains",
-            desc:"Keus really helped us in elevating our new-villa "
+            desc:"Integrate curtains & blinds into your scenes and experience the magic of ambience unfold"
         },
         {
             title:"Smart Climate",
-            desc:"Keus really helped us in elevating our new-villa. the convenience"
+            desc:"Assign the right temperature for every mood to elevate your living experience."
         },
         {
             title:"Smart Scenes",
-            desc:"Keus really helped us in elevating our new-villa "
+            desc:"Breathe life into your mood by transforming the space with smart scenes."
         },
         {
             title:"Smart Schedules",
-            desc:"Keus really helped us in elevating our new-villa "
+            desc:"Smart schedules that understand your daily needs and takes care of them for you"
         },
         {
             title:"Smart Media",
-            desc:"Keus really helped us in elevating our new-villa ",
+            desc:"Enhance the potential of your scene by integrating music and media into the ambience.",
         },
         {
             title:"Motion Sensor",
-            desc:"Keus really helped us in elevating our new-villa "
+            desc:"Smart Sense intuitively equips your home with convenience and security"
         }
     ];
 
@@ -81,28 +81,27 @@
         var mtl4=gsap.timeline({
             scrollTrigger:{
                 trigger:".mobContent4",
-                start:"top 60%",
-                end:"center 60%",
+                start:"top 70%",
+                end:"40% 70%",
                 // markers:true,
                 scrub:1
             }
         });
 
         let obj={
-            y:500,
+            y:50,
             opacity:0,
-            scaleX:0,
-            ease:"cric.out"
+            ease:"slow.out",
+            duration:.8
         }
         mtl4.from(".mobHead4",obj)
             .from(".mobDesc4",obj)
             .from(".mtDesc4",obj)
-            .from(".mobCollapse4",{...obj,scaleX:1,scaleY:0});
+            .from(".mobCollapse4",obj);
     })
 </script>
 
-<svelte:window on:click={()=>{muted=false;}} 
-
+<svelte:window
 on:scroll={triggerAllow}
 />
 
@@ -152,17 +151,13 @@ on:scroll={triggerAllow}
                             <video src="{vdoMap[i+1]}"
                             preload="auto"
                             autoplay
-                            muted={muted}
+                            playsinline
+                            muted
                             on:click|self={(e)=>{
                                 if(e.target.paused) e.target.play();
                                 else e.target.pause();  
                             }}
                             class="mobV4"></video>
-                            {#if muted}
-                                <span class="mute4">
-                                    <Fa icon={faVolumeMute} size="2x" color="#fff" />
-                                </span>
-                            {/if}
                         </div>
                         <p class="mobTitleDesc4">
                             {tb.desc}

@@ -1,13 +1,13 @@
-FROM node:18
+FROM node:18-alpine
 
 WORKDIR /
 
-COPY package.json  ./
+COPY ./server/package.json package.json ./
 
-RUN npm i
+RUN npm install --prefer-dedupe
 
-COPY . .
+COPY ./server .
 
 EXPOSE 3000
 
-CMD ["node","build"]
+CMD [ "node","server.js" ]

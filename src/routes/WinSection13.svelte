@@ -1,10 +1,44 @@
 <script>
-  import { Col, Row, Input } from "sveltestrap";
+  import { Col, Row, Input, Spinner } from "sveltestrap";
   import Select from "svelte-select";
+  import {booked} from "$lib/store/index"
   import Fa from 'svelte-fa'
   import {faEnvelope} from "@fortawesome/free-solid-svg-icons"
-  import {faFacebook,faInstagram,faLinkedin} from "@fortawesome/free-brands-svg-icons"
+  import {faFacebook,faInstagram,faLinkedin} from "@fortawesome/free-brands-svg-icons";
+  import axios from "axios";
 
+    let FName;
+    let Mobile;
+    let Email;
+    let ptype;
+    let psize;
+    let soc;
+    let lock=false;
+    let formproptyp=["Independent Home","Gated Villa","Apartment","Office","Architect/Interior Designer","Builder","PMC","Others"]
+    let formpropsz=["1501-2000","2001-3000","3001-4000","4001-5000","5001-7000","7001-above"];
+    let formstgcon=["Early Stage","Close To Handover","Electrical In Progress","Ready To Move"];
+
+    const submitForm=async ()=>{
+        lock=true;
+        let data={
+            name:FName,
+            phone:Mobile,
+            email:Email,
+            ptype:ptype.value
+        }
+        if(psize) data.psize=psize.value;
+        if(soc) data.soc=soc.value;
+        let appointment=await axios.post("/api/bookAppointment",data).catch(err=>console.log("error",err));
+        console.log(appointment);
+        if(appointment?.data?.success){
+            $booked=2;
+            setTimeout(() => {
+                $booked=1;
+            }, 400);
+            FName=Mobile=Email=ptype=psize=soc=undefined;
+        }
+        lock=false;
+    }
 
 </script>
 
@@ -21,26 +55,32 @@
             </Col>
             <Col class="pt-5">
                 <div class="form13 mt-5 pt-5">
-                    <form class="formContent13" on:submit|preventDefault>
-                        <input class="inp" type="text" placeholder="&ensp;&ensp;Full name">
-                        <input class="inp" type="tel" placeholder="&ensp;&ensp;Mobile">
-                        <input class="inp" type="email" placeholder="&ensp;&ensp;Email">
+                    <form class="formContent13" on:submit|preventDefault={submitForm}>
+                        <input class="inp" bind:value={FName} type="text" placeholder="&ensp;&ensp;Full name" required>
+                        <input class="inp" bind:value={Mobile} type="tel" placeholder="&ensp;&ensp;Mobile" required>
+                        <input class="inp" bind:value={Email} type="email" placeholder="&ensp;&ensp;Email">
                         <div class="input">
-                            <Select containerStyles="background-color:#373737;border:none;height:2.6vw" inputStyles="background-color:#373737;height:100%;font-size:1.1vw;color:#fff" placeholder="&ensp;&ensp;Property type" />
+                            <Select bind:value={ptype} required items={formproptyp} containerStyles="background-color:#373737;border:none;height:2.6vw" inputStyles="height:100%;font-size:1.1vw;" placeholder="&ensp;&ensp;Property type" />
                         </div>
                         <div class="input">
-                            <Select containerStyles="background-color:#373737;border:none;height:2.6vw" inputStyles="background-color:#373737;height:100%;font-size:1.1vw;color:#fff" placeholder="&ensp;&ensp;Property size" />
+                            <Select bind:value={psize} items={formpropsz} containerStyles="background-color:#373737;border:none;height:2.6vw" inputStyles="height:100%;font-size:1.1vw;" placeholder="&ensp;&ensp;Property size" />
                         </div>
                         <div class="input">
-                            <Select containerStyles="background-color:#373737;border:none;height:2.6vw" inputStyles="background-color:#373737;height:100%;font-size:1.1vw;color:#fff" placeholder="&ensp;&ensp;Stage of construction" />
+                            <Select bind:value={soc} items={formstgcon} containerStyles="background-color:#373737;border:none;height:2.6vw" inputStyles="height:100%;font-size:1.1vw;" placeholder="&ensp;&ensp;Stage of construction" />
                         </div>
-                        <button type="submit" class="submit">Book your appointment</button>
+                        <button type="submit" class="submit">
+                            {#if lock}
+                            <Spinner color="light" />
+                        {:else}
+                        Book your appointment
+                        {/if}
+                    </button>
                     </form>
                 </div>
             </Col>
         </Row>
     </div>
-    <div class="footer13 pb-5">
+    <!-- <div class="footer13 pb-5">
         <div class="d-block">
             <Row class="col-9 mx-auto text-center">
                 <Col>
@@ -60,7 +100,7 @@
                 </Col>
             </Row>
         </div>
-    </div>
+    </div> -->
 </div>
 <div class="foot13">
     <p class="titleDesc13">Copyright &copy 2020 KEUS All rights reserved &emsp;&emsp;&emsp; 
@@ -99,7 +139,7 @@
     }
     .foot13{
         /* height:80px; */
-        height:4.17vw;
+        min-height:4.17vw;
         color:#fff;
         background-color: #000;
         display: flex;
@@ -120,13 +160,17 @@
         font-size:1.1vw;
         height:2.6vw;
         padding:0 1vw;
-        color:#fff;
+        color:#6b7a85;
         /* margin:20px auto 0; */
         margin:1vw auto 0;
         background-color: #373737;
     }
+    .inp:focus{
+        outline:none;
+    }
     .input{
         /* width:600px; */
+        color:#78848f;
         width:31.3vw;
         height: 2.6vw;
         /* margin:20px auto; */
@@ -171,7 +215,8 @@
         font-family: 'Raleway', sans-serif;
     }
     .titleDesc13{
-        height:2.6vw;
+        min-height:2.6vw;
+        margin:1vw;
         display: flex;
         align-items: center;
     }

@@ -9,30 +9,14 @@
         gsap.from(".leftCont8",{
             scrollTrigger:{
                 trigger:".container8",
-                start:"top 65%",
-                end:"center 65%",
+                start:"top 70%",
+                end:"center 70%",
                 // markers:true,
                 scrub:1
             },
-            y:800,
-            x:-1000,
-            scaleY:0,
+            x:"-5vw",
             opacity:0,
-            ease:"cric.out"
-        })
-        gsap.from(".image8",{
-            scrollTrigger:{
-                trigger:".container8",
-                start:"top 65%",
-                end:"center 65%",
-                // markers:true,
-                scrub:1
-            },
-            y:800,
-            x:800,
-            scaleX:0,
-            opacity:0,
-            ease:"cric.out"
+            ease:"slow.out"
         })
     })
 </script>
@@ -49,24 +33,27 @@
                         <h2 class="title8 mt-5">Easy control</h2>
                         <p class="titleDesc8">of scenes, devices and schedules</p>
                         <h2 class="title8">Easy setup</h2>
-                        <p class="titleDesc8">with Alexa and Google Home</p>
+                        <p class="titleDesc8">with Apple Home, Alexa and Google Home</p>
                         <h2 class="title8">Easy commands</h2>
                         <p class="titleDesc8">for a complete smart home experience</p>
-                        <Row class="col-10">
-                            <Col class="d-flex align-items-center">
-                                <img src="src/lib/images/googleHome.png" alt="googleHome image" class="img8-1">
+                        <Row class="col-10" style="margin-top:2vw">
+                            <Col class="px-0">
+                                <img src="images/googleHome.png" alt="googleHome image" class="img8-1">
                             </Col>
-                            <Col>
-                                <img src="src/lib/images/alexa.png" alt="alexa image" class="img8-2">
+                            <Col class="px-0">
+                                <img src="images/alexa.png" alt="alexa image" class="img8-2">
+                            </Col>
+                            <Col class="px-0">
+                                <img src="images/hkit.png" alt="home-kit image" class="img83">
                             </Col>
                         </Row>
-                        <p class="desc8-1">Amazon, Alexa adn all related logo are trademarks of amazon.com, Inc. or its affiliates Google, Google play Google home and other marks are trademarks of Google LLC.</p>
+                        <p class="desc8-1">Amazon, Alexa and all related logo are trademarks of amazon.com, Inc. or its affiliates Google, Google play Google home and other marks are trademarks of Google LLC., Apple homekit is the trade mark of Apple INC.</p>
                     </div>
                 </div>
             </Col>
             <Col>
-                <div class="image8">
-                    <img src="src/lib/images/voice.png" alt="voice control" class="img8-3">
+                <div class="image8" style="background-image:url(images/bedRoom.png)">
+                    <img src="images/voice.png" alt="voice control" class="img8-3">
                 </div>
             </Col>
         </Row>
@@ -78,17 +65,19 @@
         overflow: hidden;
     }
     .image8{
-        background-image: url(../lib/images/bedRoom.png);
         background-size: 100% 100%;
-        min-height:100vh;
+        min-height:50vw;
     }
     .img8-1{
         /* width:157px; */
-        width:8.190vw;
+        width:8vw;
     }
     .img8-2{
         /* width:168px; */
-        width:8.764vw;
+        width:8vw;
+    }
+    .img83{
+        width:8vw;
     }
     .mainHead8{
         font-family: 'Playfair Display', serif;
@@ -104,8 +93,8 @@
         font-family: 'Source Sans Pro', sans-serif;
     }
     .leftColumn8{
-        margin:4vw 0 0;
-        padding:1vw 4vw 0;
+        margin:4vw auto 0;
+        padding:1vw 8vw 0;
     }
     .title8{
         /* font-size: 25px; */
@@ -145,6 +134,7 @@
         /* line-height: 15px; */
         line-height: 0.7825vw;
         color:#282828;
+        margin:1.5vw 0;
         /* width:375px; */
         width:19.5625vw;
     }
@@ -152,6 +142,6 @@
         position: absolute;
         width:10%;
         right:1.5%;
-        bottom:26vw;
+        bottom:28vw;
     }
 </style>

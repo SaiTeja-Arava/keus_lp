@@ -10,7 +10,7 @@
         },
         {
             title:"Easy setup",
-            desc:"with Alexa and Google Home"
+            desc:"with Apple Home, Alexa and Google Home"
         },
         {
             title:"Easy commands",
@@ -31,22 +31,23 @@
         });
 
         let obj={
-            y:500,
+            y:50,
             opacity:0,
-            scale:0,
-            ease:"cric.out"
+            duration:.8,
+            ease:"slow.out"
         }
-        mtl8.from(".mobHead8",obj)
-            .from(".mobDesc8",obj)
-            .from(".mobImg8",obj)
+        mtl8.from(".mobHead8",{...obj,duration:.8})
+            .from(".mobDesc8",{...obj,duration:.8})
+            .from(".mobImg8",{...obj,duration:.8})
         let titles=gsap.utils.toArray(".mobTitle8");
         let descs=gsap.utils.toArray(".mobd8");
         titles.forEach((x,i)=>{
-            mtl8.from(x,{x:-500,opacity:0})
-                .from(descs[i],{x:-500,opacity:0})
+            mtl8.from(x,{x:-200,opacity:0})
+                .from(descs[i],{x:-200,opacity:0})
         })
         mtl8.from(".mobImg8-1",obj)
             .from(".mobImg8-2",obj)
+            .from(".mobImg8-3",obj)
             .from(".mobDesc8-1",obj);
     })
 </script>
@@ -58,22 +59,24 @@
         </h1>
         <p class="mobDesc8">Home that listens</p>
         <div class="mobImg8">
-            <img src="src/lib/images/bedRoom.png" alt="bedroom image" class="mimg8">
-            <img src="src/lib/images/voice.png" alt="voice control image" class="mvimg8">
+            <img src="images/bedRoom.png" alt="bedroom image" class="mimg8">
+            <img src="images/voice.png" alt="voice control image" class="mvimg8">
         </div>
         {#each obj as o,i}
             <h1 class="mobTitle8">{o.title}</h1>
             <p class="mobd8">{o.desc}</p>
         {/each}
         <div class="mobImg8-1">
-            <img src="src/lib/images/googleHome.png" alt="google home image" class="mimg8-1">
+            <img src="images/googleHome.png" alt="google home image" class="mimg8-1">
         </div>
         <div class="mobImg8-2">
-            <img src="src/lib/images/alexa.png" alt="alexa image" class="mimg8-2">
+            <img src="images/alexa.png" alt="alexa image" class="mimg8-2">
+        </div>
+        <div class="mobImg8-3">
+            <img src="images/hkit.png" alt="homekit image" class="mimg8-3">
         </div>
         <p class="mobDesc8-1">
-            Amazon, Alexa adn all related logo are trademarks of amazon.com, 
-            Inc. or its affiliates Google, Google play Google home and other marks are trademarks of Google LLC.
+            Amazon, Alexa and all related logo are trademarks of amazon.com, Inc. or its affiliates Google, Google play Google home and other marks are trademarks of Google LLC., Apple homekit is the trade mark of Apple INC.
         </p>
     </div>
 </div>
@@ -123,10 +126,15 @@
         right:0%;
     }
     .mimg8-2{
-        scale:1.3;
+        width:50vw;
+        margin:2.5vw auto;
     }
     .mimg8-1{
-        scale:1.1;
-        margin:10vw auto 0;
+        width:50vw;
+        margin:5vw auto 2.5vw;
+    }
+    .mimg8-3{
+        width:50vw;
+        margin:2.5vw auto;
     }
 </style>

@@ -50,8 +50,9 @@
             // console.log("paused------------------")
         }
         if(y.top<0 && y.top>-(y.height)){
-            // console.log("playing+++++++++++");
-            vdo.play();
+            console.log("playing+++++++++++");
+            if(vdo.paused)
+                vdo.play();
         }
     }
 
@@ -62,20 +63,21 @@
             scrollTrigger:{
                 trigger:".mobContent3",
                 // markers:true,
-                start:"top center",
-                end:"center center",
+                start:"top 70%",
+                end:"center 70%",
                 scrub:1,
             }
         })
         let obj={
-            y:400,
+            y:50,
             opacity:0,
-            scaleX:0
+            ease:"slow.out",
+            duration:.8
         }
 
         mtl3.from(".mobHead3",obj)
             .from(".mobDesc3",obj)
-            .from(".mobCollapseDiv3",{...obj,scaleX:1,scaleY:0});
+            .from(".mobCollapseDiv3",obj);
     })
 
 
@@ -121,8 +123,14 @@
                     <Collapse isOpen={active==i}>
                         <div class="mobVdiv3" >
                             <video src="{vdoMap[getVdo()]}"
+                            on:click={(e)=>{
+                                if(e.target.paused) e.target.play();
+                                else e.target.pause();
+                            }}
                              class="mobV3"
+                             preload="auto"
                             autoplay
+                            playsinline
                             muted
                             ></video>
                         </div>

@@ -37,31 +37,31 @@
     let arr=[
         {
             title:"Smart Lights",
-            desc:"Keus really helped us in elevating our new-villa "
+            desc:"When smart tech makes your light design, transform your space with a single tap"
         },
         {
             title:"Smart Curtains",
-            desc:"Keus really helped us in elevating our new-villa "
+            desc:"Integrate curtains & blinds into your scenes and experience the magic of ambience unfold"
         },
         {
             title:"Smart Climate",
-            desc:"Keus really helped us in elevating our new-villa. the convenience"
+            desc:"Assign the right temperature for every mood to elevate your living experience."
         },
         {
             title:"Smart Scenes",
-            desc:"Keus really helped us in elevating our new-villa "
+            desc:"Breathe life into your mood by transforming the space with smart scenes."
         },
         {
             title:"Smart Schedules",
-            desc:"Keus really helped us in elevating our new-villa "
+            desc:"Smart schedules that understand your daily needs and takes care of them for you"
         },
         {
             title:"Smart Media",
-            desc:"Keus really helped us in elevating our new-villa ",
+            desc:"Enhance the potential of your scene by integrating music and media into the ambience.",
         },
         {
             title:"Motion Sensor",
-            desc:"Keus really helped us in elevating our new-villa "
+            desc:"Smart Sense intuitively equips your home with convenience and security"
         }
     ];
 
@@ -91,19 +91,25 @@
             scrollTrigger:{
                 trigger:".content4",
                 scrub:1,
-                start:"20% 80%",
-                end:"20% 40%",
+                start:"top 80%",
+                end:"20% center",
                 // markers:true,   
             }
         })
+        let opt={
+            y:"2.5vw",
+            duration:.8,
+            opacity:0,
+            ease:"slow.out"
+        }
 
-        tl2.from(".mainHead4",{y:200,scaleY:0,opacity:0,duration:.8})
-            .from(".desc4",{y:200,scaleY:0,opacity:0,duration:.8})
-            .from(".mainContainer4",{y:500,scaleX:0,opacity:0,duration:.8});
+        tl2.from(".mainHead4",opt)
+            .from(".desc4",opt)
+            .from(".mainContainer4",opt);
     })
 </script>
 
-<svelte:window on:scroll={triggerAllow} on:click={()=>muted=false} bind:innerWidth />
+<svelte:window on:scroll={triggerAllow} bind:innerWidth />
 
 <div class="content4 pt-5" bind:this={ele}>
     <div class="pt-5" >
@@ -117,19 +123,10 @@
                         if(e.target.paused) e.target.play();
                         else e.target.pause();
                     }}
-                    {muted}
+                    muted
                     preload="auto"
                     transition:fade src="{vdoMap[tv]}" class="videoSec4" autoplay></video>
                 {/key}
-                {#if muted}
-                    <span class="mute">
-                        {#if innerWidth>4500}
-                            <Fa icon={faVolumeMute} color="#fff" size="5x"/>
-                            {:else}
-                                <Fa icon={faVolumeMute} color="#fff" size="2x"/>
-                        {/if}
-                    </span>
-                {/if}
             </div>
             <div class="tabs4">
                 <Row class="h-100">
@@ -154,7 +151,7 @@
                                 <Col class="mx-auto {active==(i+1)? "col-3":"col-auto"} px-0">
                                     <div class="col-12 tabIcons4">
                                         {#if i==0}
-                                            <span class="{active==1? "float-end leftPad":""}">
+                                            <span class="{active==1? "float-end leftPad align-items-center":""}">
                                                 <Sun color="#56483D" width="2.451vw" />
                                             </span>
                                             {:else if i==1}
@@ -177,9 +174,11 @@
                                     </div>
                                 </Col>
                             {#if active==i+1}
-                                <div in:fade={{duration:500,delay:100}} class="col-9">
-                                    <h2 class="title4 mt-2">{tab.title}</h2>
-                                    <p class="titleDesc4">{tab.desc}</p>
+                                <div in:fade={{duration:500,delay:100}} class="h-100 col-9 px-0 d-flex align-items-center">
+                                    <div class="d-inline-block">
+                                        <h2 class="title4">{tab.title}</h2>
+                                        <p class="titleDesc4">{tab.desc}</p>
+                                    </div>
                                 </div>
                             {/if}
                            </Row>
@@ -199,14 +198,6 @@
     .acIcon4{
         position: relative;
         top:.4vw;
-    }
-    .mute{
-        position: absolute;
-        left:1%;
-        top:1%;
-    }
-    .mute:hover{
-        cursor: pointer;
     }
     .leftPad{
         padding:0 1vw 0;
@@ -232,7 +223,7 @@
     }
     .videoSec4{
         position: absolute;
-        width:100%;
+        width:100.5%;
         /* object-fit: cover; */
     }
     .mainHead4{
@@ -270,12 +261,12 @@
     }
     .tabs4{
         /* height:100px; */
-        height:5.2167vw;
+        height:5.8vw;
         /* position: absolute; */
         /* left:0.5vw; */
     }
     .tab4{
-        transition: .8s;
+        transition: .5s;
         padding:.1vw 0;
     }
     .tab4:hover{
@@ -284,10 +275,15 @@
     .title4{
         /* font-size: 22px; */
         font-size: 1.1476vw;
+        margin:.3vw auto .15vw;
     }
     .titleDesc4{
         /* font-size:18px; */
-        font-size: 0.939vw;
+        font-size: 0.8vw;
+        /* padding-right:.5vw; */
+        padding-top:.2vw;
+        width:90%;
+        margin:0;
         line-height: 1.2vw;
     }
 </style>
